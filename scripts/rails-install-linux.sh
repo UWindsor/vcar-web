@@ -38,6 +38,9 @@ rvm use 2.4.2 --default
 echo "gem: --no-ri --no-rdoc" > ~/.gemrc
 gem install rails
 
+echo "===> Installing bundler"
+gem install bundler
+
 echo -e "\n- - - - - -\n"
 echo -e "Now we are going to print some information to check that everything is done:\n"
 
@@ -57,9 +60,16 @@ don't match or errors are shown, something went wrong with the automated process
 and we will help you do the installation the manual way at the event.
 Congrats!
 Make sure that all works well by running the application generator command:
-    $ rails new railsgirls
+    $ rails s
 If you encounter the message:
     The program 'rails' is currently not installed.
 It is just a hiccup with the shell, solutions:
     $ source ~/.rvm/scripts/rvm
     Allow login shell, example http://rvm.io/integration/gnome-terminal/"
+
+echo "Now we install specific gems and setup database for the vcar-web application."
+echo "Installing gems..."
+bundle install
+
+echo "Preparing database..."
+rails db:setup

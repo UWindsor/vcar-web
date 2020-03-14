@@ -44,3 +44,10 @@ echo "If the versions match, everything is installed correctly. If the versions
 don't match or errors are shown, something went wrong with the automated process
 and we will help you do the installation the manual way at the event.
 Congrats!"
+
+echo "Now we install specific gems and setup database for the vcar-web application."
+echo "Installing gems..."
+bundle install
+
+echo "Preparing database..."
+rails db:setup
