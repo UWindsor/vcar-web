@@ -32,8 +32,8 @@ source ~/.rvm/scripts/rvm
 
 # Version used in vcar-web
 echo "Installs Ruby"
-rvm install 2.4.2
-rvm use 2.4.2 --default
+rvm install 2.7.0
+rvm use 2.7.0 --default
 
 echo "gem: --no-ri --no-rdoc" > ~/.gemrc
 gem install rails
@@ -49,9 +49,9 @@ echo -n "Should be sqlite 3.22.0 or higher: sqlite "
 sqlite3 --version
 echo -n "Should be rvm 1.29.8 or higher:         "
 rvm --version | sed '/^.*$/N;s/\n//g' | cut -c 1-11
-echo -n "Should be ruby 2.4.2:                "
+echo -n "Should be ruby 2.7.0:                "
 ruby -v | cut -d " " -f 2
-echo -n "Should be Rails 5.2.3 or higher:         "
+echo -n "Should be Rails 6.0.1 or higher:         "
 rails -v
 echo -e "\n- - - - - -\n"
 
