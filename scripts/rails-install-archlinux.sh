@@ -14,7 +14,7 @@ sudo pacman -S --noconfirm imagemagick
 
 echo "Installs RVM (Ruby Version Manager) for handling Ruby installation"
 # Retrieve the GPG key.
-curl -sSL https://rvm.io/mpapis.asc | gpg --import -
+curl -sSL https://rvm.io/pkuczynski.asc | gpg --import -
 curl -sSL https://get.rvm.io | bash -s stable
 source ~/.rvm/scripts/rvm
 
@@ -22,8 +22,8 @@ echo "Installs Ruby"
 rvm install 2.7.0
 rvm use 2.7.0 --default
 
-gem install bundler --no-rdoc --no-ri
-gem install rails --no-rdoc --no-ri
+gem install bundler
+gem install rails
 
 # Make sure RVM, Ruby and Rails are on the user's path
 echo '[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"' >> ~/.bashrc

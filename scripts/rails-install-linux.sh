@@ -35,10 +35,10 @@ echo "Installs Ruby"
 rvm install 2.7.0
 rvm use 2.7.0 --default
 
-echo "gem: --no-ri --no-rdoc" > ~/.gemrc
+echo "Installing rails"
 gem install rails
 
-echo "===> Installing bundler"
+echo "Installing bundler"
 gem install bundler
 
 echo -e "\n- - - - - -\n"

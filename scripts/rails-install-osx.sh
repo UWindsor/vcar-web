@@ -20,8 +20,8 @@ echo "Install Ruby"
 rvm install 2.7.0
 rvm use 2.7.0 --default
 
-gem install bundler --no-rdoc --no-ri
-gem install rails --no-rdoc --no-ri
+gem install bundler
+gem install rails
 
 echo -e "\n- - - - - -\n"
 echo -e "Now we are going to print some information to check that everything is done:\n"
