@@ -19,7 +19,7 @@ async def register(gathered_information: AuthToken):
 
     #TODO temporary, TAKE FROM ENCRRYPTED FILE
     sender_email = "testingemailforschool@gmail.com"
-    sender_pass = "Teacher01*"
+    sender_pass = "12!3456Abcdef"
 
     #sends token to the embedded 
     sendEmail(gathered_information, sender_email, sender_pass)
