@@ -1,5 +1,6 @@
 import smtplib
 import os
+import pydantic
 
 from models.auth_token_db import AuthDB
 from email.message import EmailMessage
@@ -45,4 +46,13 @@ def pipeToVCar(gathered_information):
     
     to_emb_fifo = "/tmp/rest-emp"
     from_emb_fifo = "/tmp/emb-rest"
+
+    fd = open(to_emb_fifo,'w')
+    fd.write(gathered_information.json())
+    fd.close()
+
+    fd = open(from_emb_fifo, 'r')
+    response = fd.read()
+
+    return response
 

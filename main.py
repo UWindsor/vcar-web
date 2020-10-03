@@ -8,9 +8,10 @@ from services.function_helper import sendEmail, pipeToVCar
 vcar = FastAPI()
 # TODO set up verification for jsons that do not match
 # TODO set up logging
+#TODO set up error when email that does not exists protection
 
 @vcar.post("/api/v1/register", status_code=status.HTTP_201_CREATED)
-def register(gathered_information: AuthToken):
+async def register(gathered_information: AuthToken):
     #save the credentials in the sqlite database
     gathered_information.saveCredentials()
     
@@ -26,9 +27,9 @@ def register(gathered_information: AuthToken):
 #to validate the json being received
 @vcar.exception_handler(RequestValidationError)
 async def requestValidationExceptionHandler(request, exc):
-    return PlainTextResponse(str(exc.detail), status_code=400)
+    return PlainTextResponse("Does not match!", status_code=400)
 
 #to check for http exceptions
 @vcar.exception_handler(HTTPException)
 async def httpExceptionHandler(request, exc):
-    return PlainTextResponse(str(exc.detail), status_code=exc.status_code)
+    return PlainTextResponse("Error in HTTP", status_code=500)
