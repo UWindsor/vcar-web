@@ -44,7 +44,7 @@ def sendEmail(gathered_information, sender_email, sender_pass):
 
 def pipeToVCar(gathered_information):
     
-    to_emb_fifo = "/tmp/rest-emp"
+    to_emb_fifo = "/tmp/rest-emb"
     from_emb_fifo = "/tmp/emb-rest"
 
     fd = open(to_emb_fifo,'w')
@@ -53,6 +53,7 @@ def pipeToVCar(gathered_information):
 
     fd = open(from_emb_fifo, 'r')
     response = fd.read()
+    fd.close()
 
     return response
 
