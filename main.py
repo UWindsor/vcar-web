@@ -3,6 +3,7 @@ from fastapi.exceptions import RequestValidationError, HTTPException
 from fastapi.responses import PlainTextResponse
 from models.auth_token import AuthToken
 from services.function_helper import sendEmail, pipeToVCar
+from services.encrypt_helper import decrypt_creds
 
 
 vcar = FastAPI()
@@ -14,12 +15,11 @@ vcar = FastAPI()
 async def register(gathered_information: AuthToken):
     #save the credentials in the sqlite database
     gathered_information.saveCredentials()
-    
     pipeToVCar(gathered_information)
-
-    #TODO temporary, TAKE FROM ENCRRYPTED FILE
-    sender_email = "testingemailforschool@gmail.com"
-    sender_pass = "12!3456Abcdef"
+   
+    cred_dict = decrypt_creds()
+    sender_email = cred_dict["email"]
+    sender_pass = cred_dict["password"]
 
     #sends token to the embedded 
     sendEmail(gathered_information, sender_email, sender_pass)

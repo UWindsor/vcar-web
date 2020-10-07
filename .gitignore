@@ -29,3 +29,6 @@
 vcar_env
 .env
 __pycache__
+
+.idea/
+credentials/
