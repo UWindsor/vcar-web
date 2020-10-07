@@ -57,3 +57,5 @@ def pipeToVCar(gathered_information):
 
     return response
 
+def getCredentials():
+    pass

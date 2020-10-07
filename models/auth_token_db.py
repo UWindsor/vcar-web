@@ -1,6 +1,4 @@
 import sqlite3
-import base64
-import hashlib
 
 from pydantic import BaseModel
 from sqlite3 import Error
@@ -10,7 +8,7 @@ class AuthDB:
     def __init__(self, email: str, password: str, token: str, number_of_vehicles: str):
         self.connection = self.createConnection()
         self.email = email
-        self.password = str(hashlib.sha224(password.encode('utf-8')).hexdigest())
+        self.password = password
         self.token = token
         self.number_of_vehicles = number_of_vehicles
 
