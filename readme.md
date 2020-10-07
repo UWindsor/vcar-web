@@ -39,3 +39,7 @@ This endpoint will send an email to the email in the request with a token that i
 ### /api/v1/vehicles/{vid}
     
     This endpoint will send a message to the vehicle.
+
+NOTE::
+
+Credential file must be placed in services for the program to function

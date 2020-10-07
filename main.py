@@ -15,7 +15,7 @@ vcar = FastAPI()
 async def register(gathered_information: AuthToken):
     #save the credentials in the sqlite database
     gathered_information.saveCredentials()
-    pipeToVCar(gathered_information)
+    #pipeToVCar(gathered_information)
    
     cred_dict = decrypt_creds()
     sender_email = cred_dict["email"]
