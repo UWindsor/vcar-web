@@ -56,6 +56,3 @@ def pipeToVCar(gathered_information):
     fd.close()
 
     return response
-
-def getCredentials():
-    pass
