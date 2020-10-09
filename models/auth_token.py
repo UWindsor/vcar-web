@@ -24,11 +24,10 @@ class AuthToken(BaseModel):
         self.generateToken()
         self.encryptPassword()
         #0 for registration 
-        self.id_value = 0
 
         database_session = AuthDB(str(self.encryptMessage(self.email)), self.password, self.token, self.number_of_vehicles)
         
-        saveCredentialToDB(database_session, self.email) 
+        saveCredentialToDB(database_session, str(self.encryptMessage(self.email))) 
 
     def encryptMessage(self, message):
         return str(hashlib.sha224(message.encode('utf-8')).hexdigest())
