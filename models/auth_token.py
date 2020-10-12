@@ -13,7 +13,6 @@ class AuthToken(BaseModel):
     password: str
     token: Optional[str] = None
     number_of_vehicles: Optional[int] = 0
-    id_value: Optional[int] = 0
 
     def generateToken(self):
         self.token = str(uuid.uuid4())
@@ -25,7 +24,8 @@ class AuthToken(BaseModel):
         self.encryptPassword()
         #0 for registration 
 
-        database_session = AuthDB(str(self.encryptMessage(self.email)), self.password, self.token, self.number_of_vehicles)
+        database_session = AuthDB()
+        database_session.firstConstructor(str(self.encryptMessage(self.email)), self.password, self.token, self.number_of_vehicles)
         
         saveCredentialToDB(database_session, str(self.encryptMessage(self.email))) 
 
