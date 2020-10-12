@@ -86,3 +86,6 @@ class AuthDB:
     def updateVehicleNumber(self , vnum):
         cursor = self.connection.cursor()
         cursor.execute('''UPDATE auth_token SET number_of_vehicles=? WHERE email=? AND token=?''', (vnum, self.email, self.token,))
+
+        self.connection.commit()
+        return cursor.lastrowid
