@@ -69,16 +69,25 @@ def sendVIDEmail(gathered_information, sender_email, sender_pass):
     except Exception as e:
         logError(e)
 
-
-def sendToVCar(gathered_information, endpoint):
-
-
+def getFromVCar(endpoint):
     try:
-        response = requests.post(url=(BASE_URL+endpoint), json=gathered_information.json())
-
+        response = requests.get(url=(BASE_URL+endpoint))
+        return response
+    
     except requests.exceptions.RequestException as e:
         logError(e)
 
+    return 500
+
+
+def sendToVCar(gathered_information, endpoint):
+
+    try:
+        response = requests.post(url=(BASE_URL+endpoint), json=gathered_information.json())
+        
+    except requests.exceptions.RequestException as e:
+        logError(e)
+    
 
 def logError(string_val):
     
