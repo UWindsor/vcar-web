@@ -25,7 +25,7 @@ async def register(gathered_information: AuthToken):
 @vcar.post("/api/v1/vehicles", status_code=status.HTTP_201_CREATED)
 async def createVehicles(gathered_information: VehicleRequest):
     if gathered_information.authenticateUser():
-        sendToVCar(gathered_information, "embedded/v1/vehicle")
+        sendToVCar(gathered_information, "embedded/v1/vehicles")
     
         cred_dict = decrypt_creds()
         sender_email = cred_dict["email"]
