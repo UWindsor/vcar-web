@@ -36,7 +36,7 @@ async def createVehicles(gathered_information: VehicleRequest):
         logError("User does not exist!")
 
 @vcar.get("/api/v1/vehicles/{vid}", status_code=200)
-async def getVehicleStatus(vid: string):
+async def getVehicleStatus(vid: str):
     return getFromVCar("/embedded/v1/vehicles/{"+str(vid)+"}")
 
 #to validate the json being received
