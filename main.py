@@ -3,7 +3,7 @@ from fastapi.exceptions import RequestValidationError, HTTPException
 from fastapi.responses import PlainTextResponse
 from models.auth_token import AuthToken
 from models.vehicle_request import VehicleRequest
-from services.function_helper import sendVIDEmail, sendTokenEmail, sendToVCar, logError
+from services.function_helper import sendVIDEmail, sendTokenEmail, getFromVCar, sendToVCar, logError
 from services.encrypt_helper import decrypt_creds
 
 
@@ -22,10 +22,10 @@ async def register(gathered_information: AuthToken):
     #sends token to the embedded 
     sendTokenEmail(gathered_information, sender_email, sender_pass)
 
-@vcar.post("/ap1/v1/vehicles", status_code=status.HTTP_201_CREATED)
+@vcar.post("/api/v1/vehicles", status_code=status.HTTP_201_CREATED)
 async def createVehicles(gathered_information: VehicleRequest):
     if gathered_information.authenticateUser():
-        sendToVCar(gathered_information, "embedded/v1/vehicle")
+        sendToVCar(gathered_information, "embedded/v1/vehicles")
     
         cred_dict = decrypt_creds()
         sender_email = cred_dict["email"]
@@ -34,6 +34,10 @@ async def createVehicles(gathered_information: VehicleRequest):
         sendVIDEmail(gathered_information, sender_email, sender_pass) 
     else:
         logError("User does not exist!")
+
+@vcar.get("/api/v1/vehicles/{vid}", status_code=200)
+async def getVehicleStatus(vid: str):
+    return getFromVCar("/embedded/v1/vehicles/{"+str(vid)+"}")
 
 #to validate the json being received
 @vcar.exception_handler(RequestValidationError)
