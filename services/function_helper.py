@@ -90,6 +90,8 @@ def sendToVCar(gathered_information, endpoint):
     
 
 def logError(string_val):
+    if not os.path.exists("logging"):
+        os.system("mkdir logging")
     
     print("Error!: " + str(string_val))
 
