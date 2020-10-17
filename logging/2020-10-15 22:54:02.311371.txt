@@ -1,1 +1,0 @@
-HTTPConnectionPool(host='localhost', port=7998): Max retries exceeded with url: //embedded/v1/vehicles/%7B1231%7D (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f3f5d3506a0>: Failed to establish a new connection: [Errno 111] Connection refused',))
