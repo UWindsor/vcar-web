@@ -83,7 +83,15 @@ def getFromVCar(endpoint):
 def sendToVCar(gathered_information, endpoint):
 
     try:
-        response = requests.post(url=(BASE_URL+endpoint), json=gathered_information)
+        response = requests.post(url=(BASE_URL+endpoint), json=gathered_information.json())
+        
+    except requests.exceptions.RequestException as e:
+        logError(e)
+
+def updateVCar(gathered_information, endpoint):
+
+    try:
+        response = requests.post(url=(BASE_URL+endpoint), json=gathered_information.json())
         
     except requests.exceptions.RequestException as e:
         logError(e)
