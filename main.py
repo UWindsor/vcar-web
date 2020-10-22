@@ -1,3 +1,5 @@
+import json
+
 from fastapi import FastAPI, status
 from fastapi.exceptions import RequestValidationError, HTTPException
 from fastapi.responses import PlainTextResponse
@@ -37,7 +39,14 @@ async def createVehicles(gathered_information: VehicleRequest):
 
 @vcar.get("/api/v1/vehicles/{vid}", status_code=200)
 async def getVehicleStatus(vid: str):
-    return getFromVCar("/embedded/v1/vehicles/{"+str(vid)+"}")
+    return getFromVCar("/embedded/v1/vehicles/"+str(vid))
+
+@vcar.put("/api/v1/vehicles/{vid}", status_code=200)
+async def updateVehicleStatus(vid: str):
+    
+    json_val = json.dumps({'vid': vid})
+
+    return sendToVCar(gathered_information=json_val, endpoint="/embedded/v1/vehicles/"+str(vid))   
 
 #to validate the json being received
 @vcar.exception_handler(RequestValidationError)
