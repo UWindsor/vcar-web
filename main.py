@@ -1,9 +1,12 @@
+import json
+
 from fastapi import FastAPI, status
 from fastapi.exceptions import RequestValidationError, HTTPException
 from fastapi.responses import PlainTextResponse
 from models.auth_token import AuthToken
 from models.vehicle_request import VehicleRequest
-from services.function_helper import sendVIDEmail, sendTokenEmail, getFromVCar, sendToVCar, logError
+from models.can_message import CanMessage
+from services.function_helper import sendVIDEmail, sendTokenEmail, getFromVCar, sendToVCar, updateVCar, logError
 from services.encrypt_helper import decrypt_creds
 
 
@@ -37,7 +40,15 @@ async def createVehicles(gathered_information: VehicleRequest):
 
 @vcar.get("/api/v1/vehicles/{vid}", status_code=200)
 async def getVehicleStatus(vid: str):
-    return getFromVCar("/embedded/v1/vehicles/{"+str(vid)+"}")
+    return getFromVCar("/embedded/v1/vehicles/"+str(vid))
+
+@vcar.put("/api/v1/vehicles/{vid}", status_code=200)
+async def updateVehicleStatus(vid:str, message: CanMessage):
+        
+    if message.authenticateUser():
+        updateVCar(gathered_information=message, endpoint="/embedded/v1/vehicles/"+str(vid))   
+    else:
+        logError("User does not exist!")
 
 #to validate the json being received
 @vcar.exception_handler(RequestValidationError)
