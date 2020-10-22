@@ -32,4 +32,5 @@ __pycache__
 
 .idea/
 credentials/
+logging/
 *.db
