@@ -21,12 +21,7 @@ class CanMessage(BaseModel):
         database_session = AuthDB()
         database_session.secondaryConstructor(new_email, self.token)
 
-        json_val = json.dumps({"email": self.email, "vid": self.vid})
-
-        if checkIfCredentialsExist(new_email, database_session) and self.vcarAuthentication(json_val):
+        if checkIfCredentialsExist(new_email, database_session):
             return True
         else:
             return False
-
-    def vcarAuthentication(self, information):
-        return True
