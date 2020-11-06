@@ -95,7 +95,12 @@ def updateVCar(gathered_information, endpoint):
         
     except requests.exceptions.RequestException as e:
         logError(e)
-    
+
+def deleteUserFunction(endpoint):
+    try:
+        response = requests.delete(endpoint)
+    except requests.exceptions.RequestExceptions as e:
+        logError(e)
 
 def logError(string_val):
     if not os.path.exists("logging"):

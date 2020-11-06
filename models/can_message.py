@@ -25,3 +25,4 @@ class CanMessage(BaseModel):
             return True
         else:
             return False
+

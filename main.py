@@ -4,6 +4,7 @@ from fastapi import FastAPI, status
 from fastapi.exceptions import RequestValidationError, HTTPException
 from fastapi.responses import PlainTextResponse
 from models.auth_token import AuthToken
+from models.delete_token import DeleteToken
 from models.vehicle_request import VehicleRequest
 from models.can_message import CanMessage
 from services.function_helper import sendVIDEmail, sendTokenEmail, getFromVCar, sendToVCar, updateVCar, logError
@@ -49,6 +50,13 @@ async def updateVehicleStatus(vid:str, message: CanMessage):
         updateVCar(gathered_information=message, endpoint="/embedded/v1/vehicles/"+str(vid))   
     else:
         logError("User does not exist!")
+
+@vcar.delete("/api/v1/vehicles/{vid}")
+async def deleteVehicle(vid: str, credential: DeleteToken):
+    if credential.authenticateUser():
+       return 200
+    else:
+        return 400
 
 #to validate the json being received
 @vcar.exception_handler(RequestValidationError)
